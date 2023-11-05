@@ -1,1 +1,19 @@
-"$@" > /dev/null 2>&1 &
+#! /usr/bin/bash
+
+COMMAND="$@"
+
+if [ $# -eq 0 ]; then
+    echo "No arguments provided"
+    exit 1
+fi
+
+if [ "$1" = "ii" ]; then
+    COMMAND="intellij-idea-ultimate ${@:2}"
+fi
+
+if [ "$1" = "--test" ]; then
+    echo "Script working"
+else
+    echo "Execute $@ in background"
+    $COMMAND > /dev/null 2>&1 &
+fi
